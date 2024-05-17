@@ -1,10 +1,9 @@
-import './App.css';
-
-function App() {
+import Body from "./components/Body";
+const App =() => {
   return (
-    <div className="text-3xl font-bold underline">
-      Hello NetFlix GPT......
-    </div>
+    
+      <Body/>
+    
   );
 }
 
