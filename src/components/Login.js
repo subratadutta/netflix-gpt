@@ -1,16 +1,16 @@
 import React, { useRef, useState } from 'react';
 import Header from './Header';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { checkValidateData, checkNameValidateData } from '../utils/validate';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { auth } from '../utils/firebase';
 import { useDispatch } from 'react-redux';
 import { addUser } from '../utils/userSlice';
+import { BACK_BG, USER_PHOTO } from '../utils/constant';
 
 const Login = () => {
   const [isSignInForm, setIsSignInForm] = useState(true);
   const [errorMessage, setErrorMessage] = useState(null);
-  const navigate = useNavigate();
   const dispatch = useDispatch();
   const email = useRef(null);
   const password = useRef(null);
@@ -40,7 +40,7 @@ const Login = () => {
           // Update User Profile
           updateProfile(user, {
             displayName: fullName.current.value,
-            photoURL: 'https://avatar.iran.liara.run/public/boy?username=Ash',
+            photoURL: USER_PHOTO,
           })
             .then(() => {
               // To get updated displayname & photoURL, we need
@@ -48,7 +48,6 @@ const Login = () => {
               const { uid, email, displayName, photoURL } = auth.currentUser;
               dispatch(addUser({ uid: uid, email: email, displayName: displayName, photoURL: photoURL }));
               // Navigate
-              navigate('/browse');
             })
             .catch((error) => {
               const errorCode = error.code;
@@ -69,7 +68,6 @@ const Login = () => {
           // Signed in
           const user = userCredential.user;
           console.log(user);
-          navigate('/browse');
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -83,10 +81,7 @@ const Login = () => {
     <div>
       <Header />
       <div className="absolute">
-        <img
-          src="https://assets.nflxext.com/ffe/siteui/vlv3/41c789f0-7df5-4219-94c6-c66fe500590a/3149e5eb-4660-4e3d-9e65-b1e615229c64/IN-en-20240513-popsignuptwoweeks-perspective_alpha_website_large.jpg"
-          alt="body"
-        />
+        <img src={BACK_BG} alt="body" />
       </div>
       <form
         onSubmit={(e) => e.preventDefault()}
