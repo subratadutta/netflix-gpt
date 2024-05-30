@@ -19,8 +19,6 @@ const Login = () => {
     setIsSignInForm(!isSignInForm);
   };
   const handleButtonClick = () => {
-    //console.log(email);
-    //console.log(password);
     let message;
     if (!isSignInForm) {
       message = checkNameValidateData(fullName.current.value, email.current.value, password.current.value);
@@ -36,7 +34,6 @@ const Login = () => {
         .then((userCredential) => {
           // Signed up
           const user = userCredential.user;
-          console.log(user);
           // Update User Profile
           updateProfile(user, {
             displayName: fullName.current.value,
@@ -52,14 +49,12 @@ const Login = () => {
             .catch((error) => {
               const errorCode = error.code;
               const errorMessage = error.message;
-              console.log(errorCode + '-' + errorMessage);
               setErrorMessage(errorCode + '-' + errorMessage);
             });
         })
         .catch((error) => {
           const errorCode = error.code;
           const errorMessage = error.message;
-          console.log(errorCode + '-' + errorMessage);
           setErrorMessage(errorCode + '-' + errorMessage);
         });
     } else {
@@ -67,12 +62,10 @@ const Login = () => {
         .then((userCredential) => {
           // Signed in
           const user = userCredential.user;
-          console.log(user);
         })
         .catch((error) => {
           const errorCode = error.code;
           const errorMessage = error.message;
-          console.log(errorCode + '-' + errorMessage);
           setErrorMessage(errorCode + '-' + errorMessage);
         });
     }

@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { addUser, removeUser } from '../utils/userSlice';
 import { LOGO } from '../utils/constant';
+import { toggleGPTSearchView } from '../utils/gptSlice';
 
 const Header = () => {
   const navigate = useNavigate();
@@ -19,7 +20,6 @@ const Header = () => {
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        console.log(errorCode + '-' + errorMessage);
       });
   };
   useEffect(() => {
@@ -37,12 +37,20 @@ const Header = () => {
       }
     });
   }, []);
+
+  const handleGPTSearchClick = () => {
+    dispatch(toggleGPTSearchView());
+  };
+
   return (
     <div className="absolute w-screen px-8 py-2 bg-gradient-to-b from-black z-10 flex justify-between">
       <img className="w-40" src={LOGO} alt="Logo" />
       {user && (
         <div className="flex p-2">
-          <img alt="user-icon" className="w-10 h-10" src={user.photoURL} />
+          <button onClick={handleGPTSearchClick} className="font-bold text-white bg-red-700 px-3 py-2 m-2 rounded">
+            GPT Search{' '}
+          </button>
+          <img alt="user-icon" className="ml-2 w-10 h-10" src={user.photoURL} />
           <button onClick={handleSignOut} className="pl-2 font-bold text-white">
             Sign Out
           </button>

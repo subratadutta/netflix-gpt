@@ -10,9 +10,10 @@ export const API_OPTIONS = {
   method: 'GET',
   headers: {
     accept: 'application/json',
-    Authorization:
-      'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjMDIxYTk5NWRmMjBlZjU5MzU2MTcxNjdkMzFjZGFlMiIsInN1YiI6IjY2NTFjZTZkNGYwYzMwYWI1MmEyNzU5NiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.CSTVbmyh_m82Z2OY5P_WwBeQcEEeWWFkgdNgQ7pX6GU',
+    Authorization: 'Bearer ' + process.env.REACT_APP_TMDB_TOKEN,
   },
 };
 
 export const IMDB_IMAGE_CDN_PATH = 'https://image.tmdb.org/t/p/w500';
+
+export const OPENAI_KEY = process.env.REACT_APP_OPENAI_KEY;
